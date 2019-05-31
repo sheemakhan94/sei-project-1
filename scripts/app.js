@@ -20,25 +20,29 @@ function moveEnemy() {
 }
 
 
-
+let count = 0
+let movingRight = true
 
 function move() {
 
-  let movingRight = true
-  let count = 0
-
-
   if(count < 12) {
-    enemyIndex++
-  } else if(enemyIndex === 12) {
-    count = 25
+    // console.log(count)
+    count++
+    if (movingRight) {
+      enemyIndex++
+    } else {
+      enemyIndex--
+    }
   } else {
-    movingRight = false
+    enemyIndex += width
+    count = 0
+    movingRight = !movingRight
   }
-  if(movingRight) moveEnemy()
-}
 
-setInterval(move, 250)
+  moveEnemy()
+}
+setInterval(move, 230)
+
 
 
 function handleKeyDown(e) {
