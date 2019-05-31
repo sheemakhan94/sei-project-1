@@ -11,11 +11,12 @@ html, body {
 body {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-left: 10px;
 }
 
 div.grid {
-  width: 720px;
+  width: 1040px;
   height: 720px;
   display: flex;
   flex-wrap: wrap;
@@ -31,4 +32,12 @@ div.grid-item.player {
   background-image: url('../assets/drake-sprite.png');
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
+}
+
+div.grid-item.enemy {
+  background-image: url('../assets/khaled-sprite.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }

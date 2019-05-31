@@ -1,11 +1,45 @@
-const width = 9
+window.addEventListener('DOMContentLoaded', init)
+
+const width = 13
+const height = 9
 const squares = []
-let playerIndex = 76
+let playerIndex = 110
+let enemyIndex = 0
+
 
 function movePlayer() {
   squares.forEach(square => square.classList.remove('player'))
   squares[playerIndex].classList.add('player')
 }
+
+function moveEnemy() {
+
+  squares.forEach(square => square.classList.remove('enemy'))
+  squares[enemyIndex].classList.add('enemy')
+
+}
+
+
+
+
+function move() {
+
+  let movingRight = true
+  let count = 0
+
+
+  if(count < 12) {
+    enemyIndex++
+  } else if(enemyIndex === 12) {
+    count = 25
+  } else {
+    movingRight = false
+  }
+  if(movingRight) moveEnemy()
+}
+
+setInterval(move, 250)
+
 
 function handleKeyDown(e) {
   let playerShouldMove = true
@@ -20,11 +54,6 @@ function handleKeyDown(e) {
         playerIndex--
       }
       break
-    case 40:
-      if (playerIndex + width < width * width) {
-        playerIndex += width
-      }
-      break
     default:
       playerShouldMove = false
   }
@@ -36,16 +65,14 @@ function init() {
 
   const grid = document.querySelector('.grid')
 
-  for (let i = 0; i < width * width; i++) {
+  for (let i = 0; i < width * height; i++) {
     const square = document.createElement('div')
     square.classList.add('grid-item')
     square.innerHTML = i
     squares.push(square)
     grid.append(square)
   }
-
+  squares[enemyIndex].classList.add('enemy')
   squares[playerIndex].classList.add('player')
   window.addEventListener('keydown', handleKeyDown)
-
 }
-window.addEventListener('DOMContentLoaded', init)
