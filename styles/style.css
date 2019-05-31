@@ -15,14 +15,14 @@ body {
 }
 
 div.grid {
-  width: 810px;
-  height: 400px;
+  width: 720px;
+  height: 720px;
   display: flex;
   flex-wrap: wrap;
 }
 
 div.grid-item {
-  width: 90px;
+  width: 80px;
   height: 80px;
   border: 1px dashed black;
 }

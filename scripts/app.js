@@ -20,11 +20,6 @@ function handleKeyDown(e) {
         playerIndex--
       }
       break
-    case 38:
-      if (playerIndex - width >= 0) {
-        playerIndex -= width
-      }
-      break
     case 40:
       if (playerIndex + width < width * width) {
         playerIndex += width
