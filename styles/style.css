@@ -9,10 +9,6 @@ html, body {
 }
 
 body {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-left: 10px;
 }
 
 div.grid {
@@ -20,6 +16,10 @@ div.grid {
   height: 720px;
   display: flex;
   flex-wrap: wrap;
+  /* display: flex; */
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 10px;
 }
 
 div.grid-item {
@@ -40,4 +40,21 @@ div.grid-item.enemy {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+}
+
+section {
+  display: flex;
+  justify-content: flex-end;
+}
+
+section > div {
+  display: inline-block;
+  justify-content: flex-end;
+}
+
+h1 {
+  font-family: 'Bangers', cursive;
+  font-size: 60px;
+  color: #FF80D5;
+  margin-right: 20px;
 }

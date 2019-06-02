@@ -13,11 +13,12 @@ function movePlayer() {
 }
 
 function moveEnemy() {
-
   squares.forEach(square => square.classList.remove('enemy'))
-  squares[enemyIndex].classList.add('enemy')
-
+  for (let i = 0; i < 5; i++) {
+    squares[enemyIndex+i].classList.add('enemy')
+  }
 }
+
 
 
 let count = 0
@@ -25,7 +26,8 @@ let movingRight = true
 
 function move() {
 
-  if(count < 12) {
+
+  if(count < 8) {
     // console.log(count)
     count++
     if (movingRight) {
@@ -39,9 +41,10 @@ function move() {
     movingRight = !movingRight
   }
 
+
   moveEnemy()
 }
-setInterval(move, 230)
+setInterval(move, 500)
 
 
 
@@ -76,7 +79,10 @@ function init() {
     squares.push(square)
     grid.append(square)
   }
-  squares[enemyIndex].classList.add('enemy')
+
+  for (let i = 0; i < 5; i++) {
+    squares[enemyIndex+i].classList.add('enemy')
+  }
   squares[playerIndex].classList.add('player')
   window.addEventListener('keydown', handleKeyDown)
 }
