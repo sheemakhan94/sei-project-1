@@ -16,6 +16,8 @@ function moveEnemy() {
   squares.forEach(square => square.classList.remove('enemy'))
   for (let i = 0; i < 5; i++) {
     squares[enemyIndex+i].classList.add('enemy')
+    squares[enemyIndex+i + width].classList.add('enemy')
+    squares[enemyIndex+i + (width * 2)].classList.add('enemy')
   }
 }
 
@@ -44,7 +46,7 @@ function move() {
 
   moveEnemy()
 }
-setInterval(move, 500)
+// setInterval(move, 500)
 
 
 
@@ -82,6 +84,8 @@ function init() {
 
   for (let i = 0; i < 5; i++) {
     squares[enemyIndex+i].classList.add('enemy')
+    squares[enemyIndex+i + width].classList.add('enemy')
+    squares[enemyIndex+i + (width * 2)].classList.add('enemy')
   }
   squares[playerIndex].classList.add('player')
   window.addEventListener('keydown', handleKeyDown)
