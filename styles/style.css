@@ -40,7 +40,16 @@ div.grid-item.enemy {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  transition: move 1s ease;
 }
+
+div.grid-item.cash {
+  background-image: url('../assets/cash-sprite.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
 
 section {
   display: flex;
