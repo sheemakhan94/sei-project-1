@@ -46,7 +46,7 @@ function move() {
 
   moveEnemy()
 }
-// setInterval(move, 500)
+setInterval(move, 500)
 
 
 
