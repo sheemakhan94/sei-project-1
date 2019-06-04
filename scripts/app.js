@@ -41,19 +41,31 @@ function handleKeyDown(e) {
 function moveEnemy() {
   squares.forEach(square => square.classList.remove('enemy'))
   squares.forEach(square => square.dataset.id = null)
+  squares.forEach(square => square.dataset.row = null)
   for (let i = 0; i < 7; i++) {
     if (enemyRowOne[i]) {
       squares[enemyIndex+i].classList.add('enemy')
       squares[enemyIndex+i].dataset.id  = i
+      squares[enemyIndex+i].dataset.row = 1
     }
+  }
 
-    // squares[enemyIndex+i + width].classList.add('enemy')
-    // squares[enemyIndex+i + width].dataset.id  = i + 7
-    // squares[enemyIndex+i + (width * 2)].classList.add('enemy')
-    // squares[enemyIndex+i + width].dataset.id  = i + 14
+  for(let i = 0; i < 7; i++) {
+    if (enemyRowTwo[i]) {
+      squares[enemyIndex+i + width].classList.add('enemy')
+      squares[enemyIndex+i + width].dataset.id  = i
+      squares[enemyIndex+i + width].dataset.row = 2
+    }
+  }
+
+  for(let i = 0; i < 7; i++) {
+    if (enemyRowThree[i]) {
+      squares[enemyIndex+i + (width * 2)].classList.add('enemy')
+      squares[enemyIndex+i + (width * 2)].dataset.id  = i
+      squares[enemyIndex+i + (width * 2)].dataset.row = 3
+    }
   }
 }
-
 
 let count = 0
 let movingRight = true
@@ -87,30 +99,51 @@ function moveCash() {
   cashIndex -= width
   if (squares[cashIndex]) {
     squares[cashIndex].classList.add('cash')
-  } else {
-    clearInterval(cashTimer)
+  // } else {
+  //   clearInterval(cashTimer)
   }
 }
 
 function shootCash() {
   squares[cashIndex].classList.add('cash')
-  cashTimer = setInterval(moveCash, 500)
-  // don't forget to put a timeout in here as well or the missile will run eternally!
+  cashTimer = setInterval(moveCash, 250)
   setTimeout(() => {
-    // console.log('clear the cash interval')
     clearInterval(cashTimer)
   }, 4000)
-
 }
+
 
 function checkHits() {
   squares.forEach(square => {
-    if(square.classList.contains('cash') && square.classList.contains('enemy')) { // turn the class off and clear moveCash interval
-      enemyRowOne[parseInt(square.dataset.id)] = false
-      square.classList.remove('enemy')
+    if(square.classList.contains('cash') && square.classList.contains('enemy')) {
+      console.log(square.dataset.row)
+
+      if (square.dataset.row === '3') {
+        enemyRowThree[parseInt(square.dataset.id)] = false
+        square.classList.remove('enemy')
+        square.classList.remove('cash')
+        cashIndex = null
+        clearInterval(cashTimer)
+        return
+
+      } else if (square.dataset.row === '2') {
+        enemyRowTwo[parseInt(square.dataset.id)] = false
+        square.classList.remove('enemy')
+        square.classList.remove('cash')
+        cashIndex = null
+        clearInterval(cashTimer)
+        return
+
+      } else if (square.dataset.row === '1') {
+        enemyRowOne[parseInt(square.dataset.id)] = false
+        square.classList.remove('enemy')
+        square.classList.remove('cash')
+        cashIndex = null
+        clearInterval(cashTimer)
+        return
+      }
     }
   })
-  console.log(enemyRowOne)
 }
 
 let enemyRowOne = []
@@ -135,21 +168,22 @@ function init() {
   for (let i = 0; i < 7; i++) {
     squares[enemyIndex+i].classList.add('enemy')
     squares[enemyIndex+i].dataset.id  = i
+    squares[enemyIndex+i].dataset.row = 1
     enemyRowOne.push(true)
-    console.log(enemyRowOne)
-
-    for (let i = 0; i < 7; i++)
-      squares[enemyIndex+i + width].classList.add('enemy')
-    squares[enemyIndex+i + width].dataset.id  = i + 7
-    enemyRowTwo.push(true)
-    console.log(enemyRowTwo)
-
-    for (let i = 0; i < 7; i++)
-      squares[enemyIndex+i + (width * 2)].classList.add('enemy')
-    squares[enemyIndex+i + width].dataset.id  = i + 14
-    enemyRowThree.push(true)
-    console.log(enemyRowThree)
   }
+  for (let i = 0; i < 7; i++) {
+    squares[enemyIndex+i + width].classList.add('enemy')
+    squares[enemyIndex+i + width].dataset.id  = i
+    squares[enemyIndex+i + width].dataset.row = 2
+    enemyRowTwo.push(true)
+  }
+  for (let i = 0; i < 7; i++) {
+    squares[enemyIndex+i + (width * 2)].classList.add('enemy')
+    squares[enemyIndex+i + (width * 2)].dataset.id  = i
+    squares[enemyIndex+i + (width * 2)].dataset.row = 3
+    enemyRowThree.push(true)
+  }
+  console.log(enemyRowOne, enemyRowTwo, enemyRowThree)
   squares[playerIndex].classList.add('player')
   // squares[cashIndex].classList.add('cash')
   window.addEventListener('keydown', handleKeyDown)
