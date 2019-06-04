@@ -6,7 +6,7 @@ const squares = []
 let playerIndex = 110
 let enemyIndex = 0
 let cashIndex = null
-let keyIndex = null
+// let keyIndex = null
 
 function movePlayer() {
   squares.forEach(square => square.classList.remove('player'))
@@ -102,15 +102,13 @@ function moveCash() {
     squares[cashIndex].classList.add('cash')
   } else {
     clearInterval(cashTimer)
+    console.log('clearIntervalOne')
   }
 }
 
 function shootCash() {
   squares[cashIndex].classList.add('cash')
   cashTimer = setInterval(moveCash, 250)
-  setTimeout(() => {
-    clearInterval(cashTimer)
-  }, 4000)
 }
 
 
