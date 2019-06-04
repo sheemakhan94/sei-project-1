@@ -6,6 +6,7 @@ const squares = []
 let playerIndex = 110
 let enemyIndex = 0
 let cashIndex = null
+let keyIndex = null
 
 function movePlayer() {
   squares.forEach(square => square.classList.remove('player'))
@@ -88,7 +89,7 @@ function move() {
 
   moveEnemy()
 }
-setInterval(move, 500)
+setInterval(move, 1000)
 
 let cashTimer = null
 
@@ -99,8 +100,8 @@ function moveCash() {
   cashIndex -= width
   if (squares[cashIndex]) {
     squares[cashIndex].classList.add('cash')
-  // } else {
-  //   clearInterval(cashTimer)
+  } else {
+    clearInterval(cashTimer)
   }
 }
 
@@ -145,6 +146,17 @@ function checkHits() {
     }
   })
 }
+
+// function dropKey() {
+//   squares.forEach(square => square.classList.remove('key'))
+//   keyIndex = Math.random(enemyIndex + width)
+//   if (squares[keyIndex]) {
+//     squares[keyIndex].classList.add('key')
+//
+//   }
+// }
+
+// setInterval(dropKey, 3000)
 
 let enemyRowOne = []
 

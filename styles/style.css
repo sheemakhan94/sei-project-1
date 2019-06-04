@@ -29,16 +29,16 @@ div.grid-item {
 }
 
 div.grid-item.player {
-  background-image: url('../assets/drake-sprite.png');
+  background-image: url('../assets/drake-sprite-two.jpg');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 150px;
   background-position: center;
 }
 
 div.grid-item.enemy {
-  background-image: url('../assets/khaled-sprite.png');
+  background-image: url('../assets/khaled-sprite-two.jpg');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100px;
   background-position: center;
   transition: move 1s ease;
 }
@@ -46,7 +46,14 @@ div.grid-item.enemy {
 div.grid-item.cash {
   background-image: url('../assets/cash-sprite.png');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 55px;
+  background-position: center;
+}
+
+div.grid-item.key {
+  background-image: url('../assets/key-sprite.png');
+  background-repeat: no-repeat;
+  background-size: 55px;
   background-position: center;
 }
 
