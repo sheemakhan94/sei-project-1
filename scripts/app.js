@@ -6,7 +6,7 @@ const squares = []
 let playerIndex = 110
 let enemyIndex = 0
 let cashIndex = null
-// let keyIndex = null
+let keyIndex = null
 
 function movePlayer() {
   squares.forEach(square => square.classList.remove('player'))
@@ -111,6 +111,7 @@ function shootCash() {
   cashTimer = setInterval(moveCash, 250)
 }
 
+let enemyHit = false
 
 function checkHits() {
   squares.forEach(square => {
@@ -119,42 +120,99 @@ function checkHits() {
 
       if (square.dataset.row === '3') {
         enemyRowThree[parseInt(square.dataset.id)] = false
+        enemyHit = true
         square.classList.remove('enemy')
         square.classList.remove('cash')
         cashIndex = null
         clearInterval(cashTimer)
+        increaseScore()
         return
 
       } else if (square.dataset.row === '2') {
         enemyRowTwo[parseInt(square.dataset.id)] = false
+        enemyHit = true
         square.classList.remove('enemy')
         square.classList.remove('cash')
         cashIndex = null
         clearInterval(cashTimer)
+        increaseScore()
         return
 
       } else if (square.dataset.row === '1') {
         enemyRowOne[parseInt(square.dataset.id)] = false
+        enemyHit = true
         square.classList.remove('enemy')
         square.classList.remove('cash')
         cashIndex = null
         clearInterval(cashTimer)
+        increaseScore()
         return
       }
     }
   })
 }
 
-// function dropKey() {
-//   squares.forEach(square => square.classList.remove('key'))
-//   keyIndex = Math.random(enemyIndex + width)
-//   if (squares[keyIndex]) {
-//     squares[keyIndex].classList.add('key')
-//
-//   }
-// }
 
-// setInterval(dropKey, 3000)
+
+
+function dropKey() {
+
+  const keyRow = Math.floor(Math.random() * 3 + 1)
+  const keyId = Math.floor(Math.random() * 7)
+  // console.log('Row: ', keyRow, 'ID: ', keyId)
+  // console.log('find element with keyRow and keyId', document.querySelector(`div[data-row='${keyRow}'][data-id='${keyId}']`))
+  // console.log('find index of that element', squares.indexOf(document.querySelector(`div[data-row='${keyRow}'][data-id='${keyId}']`)))
+  keyIndex = squares.indexOf(document.querySelector(`div[data-row='${keyRow}'][data-id='${keyId}']`))
+
+
+  const keyTimer = setInterval(moveKey, 250)
+  setTimeout(() => {
+    clearInterval(keyTimer)
+    squares[keyIndex].classList.remove('key')
+  },2000)
+}
+
+
+function moveKey() {
+  checkForDrake()
+  squares[keyIndex].classList.remove('key')
+  keyIndex += width
+  squares[keyIndex].classList.add('key')
+
+  // console.log('dropping key at', keyIndex)
+}
+
+setInterval(dropKey, 3000)
+
+let playerLives = null
+let livesRemaining = 3
+
+function checkForDrake() {
+  squares.forEach(square => {
+    if(square.classList.contains('key') && square.classList.contains('player')) {
+      // console.log('player hit')
+      livesRemaining --
+      playerLives.innerHTML = livesRemaining
+    }
+    if(livesRemaining === -1) {
+      window.alert('Game Over')
+    }
+  })
+}
+
+let startingScore = null
+let currentScore = 0
+
+function increaseScore() {
+  if(enemyHit) {
+    console.log('enemy hit')
+    currentScore++
+    startingScore.innerHTML = currentScore
+  }
+  if(currentScore === 21) {
+    window.alert('You Won!')
+  }
+}
 
 let enemyRowOne = []
 
@@ -195,6 +253,8 @@ function init() {
   }
   console.log(enemyRowOne, enemyRowTwo, enemyRowThree)
   squares[playerIndex].classList.add('player')
+  playerLives = document.querySelector('.lives')
+  startingScore = document.querySelector('.score')
   // squares[cashIndex].classList.add('cash')
   window.addEventListener('keydown', handleKeyDown)
 }
