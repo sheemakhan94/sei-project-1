@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', init)
 
-const width = 13
-const height = 9
+const width = 12
+const height = 10
 const squares = []
 let playerIndex = 110
 let enemyIndex = 0
@@ -72,7 +72,7 @@ let count = 0
 let movingRight = true
 
 function move() {
-  if(count < 6) {
+  if(count < 5) {
     // console.log(count)
     count++
     if (movingRight) {
@@ -126,6 +126,7 @@ function checkHits() {
         cashIndex = null
         clearInterval(cashTimer)
         increaseScore()
+        anotherOne()
         return
 
       } else if (square.dataset.row === '2') {
@@ -136,6 +137,7 @@ function checkHits() {
         cashIndex = null
         clearInterval(cashTimer)
         increaseScore()
+        anotherOne()
         return
 
       } else if (square.dataset.row === '1') {
@@ -146,13 +148,19 @@ function checkHits() {
         cashIndex = null
         clearInterval(cashTimer)
         increaseScore()
+        anotherOne()
         return
       }
     }
   })
 }
 
+const enemyHitSound = new Audio()
 
+function anotherOne() {
+  enemyHitSound.src = 'audio/another-one.mp3'
+  enemyHitSound.play()
+}
 
 
 function dropKey() {
@@ -186,22 +194,44 @@ setInterval(dropKey, 3000)
 
 let playerLives = null
 let livesRemaining = 3
+let gameOver = false
 
 function checkForDrake() {
+
   squares.forEach(square => {
     if(square.classList.contains('key') && square.classList.contains('player')) {
       // console.log('player hit')
       livesRemaining --
       playerLives.innerHTML = livesRemaining
+      playedYourself()
+      gameOver = false
     }
-    if(livesRemaining === -1) {
-      window.alert('Game Over')
+    if(livesRemaining === 0) {
+      console.log('Game Over')
+      youLose(gameOver)
+      gameOver = true
     }
   })
 }
 
+const loseSound = new Audio()
+const playerHitSound = new Audio()
+
+function youLose() {
+  loseSound.src = 'audio/winning-not-easy.mp3'
+  setTimeout(() => {
+    loseSound.play()
+  }, 5000)
+}
+
+function playedYourself() {
+  playerHitSound.src = 'audio/played-yourself.mp3'
+  playerHitSound.play()
+}
+
 let startingScore = null
 let currentScore = 0
+
 
 function increaseScore() {
   if(enemyHit) {
@@ -210,8 +240,16 @@ function increaseScore() {
     startingScore.innerHTML = currentScore
   }
   if(currentScore === 21) {
-    window.alert('You Won!')
+    console.log('You Won!')
+    youGenius()
   }
+}
+
+const winSound = new Audio()
+
+function youGenius() {
+  winSound.src = 'audio/you-a-genius.mp3'
+  winSound.play()
 }
 
 let enemyRowOne = []
@@ -228,7 +266,7 @@ function init() {
   for (let i = 0; i < width * height; i++) {
     const square = document.createElement('div')
     square.classList.add('grid-item')
-    square.innerHTML = i
+    // square.innerHTML = i
     squares.push(square)
     grid.append(square)
   }

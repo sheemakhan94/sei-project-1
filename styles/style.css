@@ -9,27 +9,30 @@ html, body {
 }
 
 body {
+  font-family: 'Bangers', cursive;
+  color: #CC0000;
+  display: flex;
+  flex-direction: row-reverse;
+  background: #fff5e6;
 }
 
 div.grid {
-  width: 1040px;
-  height: 720px;
+  width: 960px;
+  height: 800px;
   display: flex;
   flex-wrap: wrap;
-  /* display: flex; */
   align-items: center;
   justify-content: flex-start;
-  margin-left: 10px;
 }
 
 div.grid-item {
-  width: 80px;
+  width: 79px;
   height: 80px;
-  border: 1px dashed black;
+  /* border: 1px dashed black; */
 }
 
 div.grid-item.player {
-  background-image: url('../assets/drake-sprite-two.jpg');
+  background-image: url('../assets/drake-sprite-two.png');
   background-repeat: no-repeat;
   background-size: 150px;
   background-position: center;
@@ -57,19 +60,42 @@ div.grid-item.key {
   background-position: center;
 }
 
-section {
+
+.aside {
   display: flex;
-  justify-content: flex-end;
 }
 
-section > div {
-  display: inline-block;
-  justify-content: flex-end;
-}
-
-/* h1 {
-  font-family: 'Bangers', cursive;
-  font-size: 60px;
-  color: #FF80D5;
+h1 {
+  font-size: 70px;
   margin-right: 20px;
+}
+
+h2 {
+  font-size: 50px;
+}
+
+p {
+  font-size: 30px;
+}
+
+/* .intro {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.intro h1 {
+  font-size: 100px;
+}
+
+.intro button {
+  width: 200px;
+  height: 100px;
+  background: #CC0000;
+  color: #fff5e6;
+  border-radius: 10px;
+  font-size: 50px;
+  font-family: 'Bangers', cursive;
 } */
