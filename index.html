@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Game Project</title>
-    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
-    <script type="text/javascript" src = "scripts/app.js"></script>
-    <link rel="stylesheet" href="styles/style.css">
-  </head>
-  <body>
-    <section class="aside>"
+<head>
+  <meta charset="utf-8">
+  <title>Game Project</title>
+  <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+  <script type="text/javascript" src = "scripts/app.js"></script>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <div class="intro">
+    <h1>DRAKE INVADERS</h1>
+    <p>Oh no! Someone taught DJ Khaled how to use Snapchat and since then nothing was the same. Help Khaled's long-suffering BFF Drake calm the the dastardly DJ down by throwing young money at him. Take care not to lose more life by dodging the major key alerts. Three chances and you're done!</p>
+    <button type="button" class="start">START</button>
+  </div>
+  <div class="game">
+    <section class="aside">
       <div>
         <h1>DRAKE INVADERS</h1>
         <p>Press l/r arrow keys to move</p>
@@ -21,9 +27,18 @@
     </section>
     <div class="grid">
     </div>
-    <!-- <div class="intro">
-      <h1>DRAKE INVADERS</h1>
-      <button type="button">START</button>
-    </div> -->
-  </body>
+  </div>
+  <div class="endgame">
+    <div class="win">
+      <h1>YOU WIN</h1>
+      <p>"You smart. You very smart. As a matter of fact you a genius."</p>
+      <button type="button" class="replayWin">Play again?</button>
+    </div>
+    <div class="lose">
+      <h1>YOU LOSE</h1>
+      <p>"They never said winning was easy - some people can't handle success."</p>
+      <button type="button" class="replayLose">Play again?</button>
+    </div>
+  </div>
+</body>
 </html>

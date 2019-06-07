@@ -7,6 +7,36 @@ let playerIndex = 110
 let enemyIndex = 0
 let cashIndex = null
 let keyIndex = null
+let startBtn = null
+let splashScreen = null
+let gameScreen = null
+let winScreen = null
+let loseScreen = null
+let startTimer = null
+let dropTimer = null
+let grid = null
+let replayBtnWin = null
+let replayBtnLose = null
+
+
+
+function startGame() {
+  startBtn.removeEventListener('click', startGame)
+  splashScreen.style.display = 'none'
+  gameScreen.style.display = 'flex'
+  startTimer = setInterval(move, 1000)
+  dropTimer = setInterval(dropKey, 3000)
+  forFree()
+}
+
+const bckgrndMusic = new Audio()
+
+function forFree() {
+  bckgrndMusic.src = 'audio/for-free.mp3'
+  bckgrndMusic.volume = 0.4
+  bckgrndMusic.play()
+}
+
 
 function movePlayer() {
   squares.forEach(square => square.classList.remove('player'))
@@ -89,7 +119,7 @@ function move() {
 
   moveEnemy()
 }
-setInterval(move, 1000)
+
 
 let cashTimer = null
 
@@ -159,6 +189,7 @@ const enemyHitSound = new Audio()
 
 function anotherOne() {
   enemyHitSound.src = 'audio/another-one.mp3'
+  enemyHitSound.volume = 0.2
   enemyHitSound.play()
 }
 
@@ -177,7 +208,7 @@ function dropKey() {
   setTimeout(() => {
     clearInterval(keyTimer)
     squares[keyIndex].classList.remove('key')
-  },2000)
+  },2250)
 }
 
 
@@ -190,11 +221,10 @@ function moveKey() {
   // console.log('dropping key at', keyIndex)
 }
 
-setInterval(dropKey, 3000)
+
 
 let playerLives = null
 let livesRemaining = 3
-let gameOver = false
 
 function checkForDrake() {
 
@@ -204,28 +234,26 @@ function checkForDrake() {
       livesRemaining --
       playerLives.innerHTML = livesRemaining
       playedYourself()
-      gameOver = false
     }
     if(livesRemaining === 0) {
-      console.log('Game Over')
-      youLose(gameOver)
-      gameOver = true
+      console.log('you lose')
+      loseScreen.style.display = 'flex'
+      gameScreen.style.display = 'none'
     }
   })
 }
 
-const loseSound = new Audio()
 const playerHitSound = new Audio()
 
 function youLose() {
-  loseSound.src = 'audio/winning-not-easy.mp3'
-  setTimeout(() => {
-    loseSound.play()
-  }, 5000)
+  clearInterval(startTimer)
+  clearInterval(cashTimer)
+  clearInterval(dropTimer)
 }
 
 function playedYourself() {
   playerHitSound.src = 'audio/played-yourself.mp3'
+  playerHitSound.volume = 1
   playerHitSound.play()
 }
 
@@ -241,16 +269,13 @@ function increaseScore() {
   }
   if(currentScore === 21) {
     console.log('You Won!')
-    youGenius()
+    winScreen.style.display = 'flex'
+    gameScreen.style.display = 'none'
   }
 }
 
-const winSound = new Audio()
 
-function youGenius() {
-  winSound.src = 'audio/you-a-genius.mp3'
-  winSound.play()
-}
+
 
 let enemyRowOne = []
 
@@ -259,9 +284,13 @@ let enemyRowTwo = []
 let enemyRowThree = []
 
 
+function resetGame() {
+  location.reload()
+}
+
 function init() {
 
-  const grid = document.querySelector('.grid')
+  grid = document.querySelector('.grid')
 
   for (let i = 0; i < width * height; i++) {
     const square = document.createElement('div')
@@ -289,10 +318,25 @@ function init() {
     squares[enemyIndex+i + (width * 2)].dataset.row = 3
     enemyRowThree.push(true)
   }
-  console.log(enemyRowOne, enemyRowTwo, enemyRowThree)
+
+  startBtn = document.querySelector('.start')
+  splashScreen = document.querySelector('.intro')
+  gameScreen = document.querySelector('.game')
+
+  winScreen = document.querySelector('.win')
+  loseScreen = document.querySelector('.lose')
+
+  replayBtnWin = document.querySelector('.replayWin')
+  replayBtnLose = document.querySelector('.replayLose')
+
+  startBtn.addEventListener('click', startGame)
+
+
   squares[playerIndex].classList.add('player')
   playerLives = document.querySelector('.lives')
   startingScore = document.querySelector('.score')
   // squares[cashIndex].classList.add('cash')
   window.addEventListener('keydown', handleKeyDown)
+  replayBtnWin.addEventListener('click', resetGame)
+  replayBtnLose.addEventListener('click',resetGame)
 }
