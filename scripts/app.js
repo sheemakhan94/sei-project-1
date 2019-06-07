@@ -235,10 +235,11 @@ function checkForDrake() {
       playerLives.innerHTML = livesRemaining
       playedYourself()
     }
-    if(livesRemaining === 0) {
+    if(livesRemaining === 0 || enemyIndex >= 95) {
       console.log('you lose')
       loseScreen.style.display = 'flex'
       gameScreen.style.display = 'none'
+      youLose()
     }
   })
 }
@@ -295,7 +296,7 @@ function init() {
   for (let i = 0; i < width * height; i++) {
     const square = document.createElement('div')
     square.classList.add('grid-item')
-    // square.innerHTML = i
+    square.innerHTML = i
     squares.push(square)
     grid.append(square)
   }
