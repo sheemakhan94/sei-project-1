@@ -33,7 +33,7 @@ const bckgrndMusic = new Audio()
 
 function forFree() {
   bckgrndMusic.src = 'audio/for-free.mp3'
-  bckgrndMusic.volume = 0.4
+  bckgrndMusic.volume = 0.2
   bckgrndMusic.play()
 }
 
@@ -296,7 +296,7 @@ function init() {
   for (let i = 0; i < width * height; i++) {
     const square = document.createElement('div')
     square.classList.add('grid-item')
-    square.innerHTML = i
+    // square.innerHTML = i
     squares.push(square)
     grid.append(square)
   }
