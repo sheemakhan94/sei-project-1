@@ -33,7 +33,7 @@ const bckgrndMusic = new Audio()
 
 function forFree() {
   bckgrndMusic.src = 'audio/for-free.mp3'
-  bckgrndMusic.volume = 0.2
+  bckgrndMusic.volume = 0.3
   bckgrndMusic.play()
 }
 
