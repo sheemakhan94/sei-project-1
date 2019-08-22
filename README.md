@@ -17,6 +17,9 @@ My game is fundamentally a version of the popular Space Invaders using the chara
 - Press left and right arrow keys to move player
 - Press space bar to shoot money
 - Press 'Play Again' button once the game is won or lost to play again
+
+<img src="assets/Gameplay.png" width="600">
+
 #### Making the game
 The functionality of the game was built using entirely vanilla JavaScript. First I created a grid using CSS and JS with each square being an object in an array, then placed my defending character in the bottom row centre square. I used key codes to write a switch statement which moved the player icon either left or right by one square's width. If the player had to move, a function was then called which toggled classes on and off in order to render the player in the correct square. The same principle was applied when shooting the cash however the function was on a timed interval, with the cash sprite moving away vertically from the player's position by one square's width every .25 seconds:
 
